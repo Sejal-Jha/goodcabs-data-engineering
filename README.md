@@ -59,6 +59,8 @@ flowchart TD
     I -.-> E
     I -.-> F
 ```
+<img width="14204" height="4628" alt="architecture" src="https://github.com/user-attachments/assets/e0177688-20ed-446c-b470-ccdd4de0833d" />
+
 
 ###  Pipeline Flow
 
