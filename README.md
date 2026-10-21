@@ -1,11 +1,6 @@
+#  GoodCabs — End-to-End Data Engineering & Analytics — LakeFlow Spark Declarative Pipeline
 
-
-
-
-
-
-
-## GoodCabs — End-to-End Data Engineering & Analytics Project — LakeFlow Spark Declarative Pipeline
+The project transforms raw cab-trip data into structured, city-specific datasets and business insights, supported by SQL analysis and an executive analytics dashboard.
 
 
 <p align="center">
@@ -15,6 +10,7 @@
   <img src="https://img.shields.io/badge/SQL-Analytics-4479A1?style=for-the-badge&logo=postgresql&logoColor=white" alt="SQL" />
   <img src="https://img.shields.io/badge/Amazon%20S3-Cloud%20Storage-569A31?style=for-the-badge&logo=amazons3&logoColor=white" alt="Amazon S3" />
 </p>
+
 ---
 
 ##  1. Project Overview
