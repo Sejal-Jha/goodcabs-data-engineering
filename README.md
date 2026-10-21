@@ -59,8 +59,6 @@ flowchart TD
     I -.-> E
     I -.-> F
 ```
-<img width="14204" height="4628" alt="architecture" src="https://github.com/user-attachments/assets/e0177688-20ed-446c-b470-ccdd4de0833d" />
-
 
 ###  Pipeline Flow
 
@@ -71,7 +69,7 @@ flowchart TD
 5. **SQL Analytics:** Business KPIs and data quality checks are performed.
 6. **Dashboard:** Results are presented through interactive visualizations.
 
-###  Architecture Screenshot
+###  <img width="14204" height="4628" alt="architecture" src="https://github.com/user-attachments/assets/27a54e86-34ce-47d0-919f-69c9b099ce71" />
 
 <!-- Upload your image to screenshots/goodcabs-architecture.png and uncomment the next line. -->
 
