@@ -99,7 +99,8 @@ The data pipeline processes raw city and trip data through three layers of the M
 
 **Bronze Layer Screenshot**
 
-\<!-- ![Bronze Layer]\(screenshots/bronze-layer.png) -->
+<img width="1870" height="911" alt="Screenshot 2026-10-22 195254" src="https://github.com/user-attachments/assets/fcad4bbd-375e-4755-9dc1-cbc8cc03d742" />
+
 
 ### 4.2 Silver Layer — Data Cleaning and Transformation
 
