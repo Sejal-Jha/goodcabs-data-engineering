@@ -13,190 +13,204 @@ The project transforms raw cab-trip data into structured, city-specific datasets
 
 ---
 
-##  1. Project Overview
+## 1. Project Overview
 
-GoodCabs is a transportation data engineering and analytics project based on a simulated cab service operating across multiple cities in India.
+GoodCabs is a simulated cab service operating across multiple cities in India. This project demonstrates how transportation data can be ingested, transformed, validated, and prepared for regional reporting and business analysis.
 
-This project uses **Databricks Lakeflow Spark Declarative Pipelines, AWS S3, PySpark, SQL, and the Medallion Architecture** to transform raw city and trip data into structured datasets for business analysis.
+The project uses Databricks Lakeflow Spark Declarative Pipelines to organize data processing into Bronze, Silver, and Gold layers. The processed datasets support SQL-based analysis and city-level business reporting.
 
-Alongside the data pipeline, I developed additional SQL queries, KPI calculations, data quality checks, and the **GoodCabs Executive Analytics** dashboard.
+In addition to working with the data pipeline, I developed extra SQL queries, KPI calculations, data quality checks, and the **GoodCabs Executive Analytics** dashboard.
 
-##  2. Business Problem
+## 2. Business Problem
 
-As a cab service expands across multiple cities, business teams need reliable and city-specific data to understand operational performance.
+As a transportation business expands across multiple cities, teams need reliable and detailed information to understand operational performance.
 
-The key challenges addressed by this project are:
+The project addresses the following business challenges:
 
-- 🔴 **Delayed insights:** Business teams need timely access to trip and revenue information.
-- 🔴 **Limited regional visibility:** Generic reports may not provide sufficient city-level detail.
-- 🔴 **Manual data preparation:** Repeated data preparation can make reporting more time-consuming.
-- 🔴 **Data quality concerns:** Invalid, incomplete, or duplicate records can affect analytical reliability.
-- 🔴 **Fragmented reporting:** Managers need a consistent way to compare cities, passenger categories, and business trends.
+- **Delayed insights:** Business teams need timely access to trip and revenue information.
+- **Limited regional visibility:** General reports may not provide enough detail for individual cities.
+- **Manual data preparation:** Repeated data preparation can make reporting more time-consuming.
+- **Data quality issues:** Invalid, incomplete, or duplicate records can affect analytical reliability.
+- **Fragmented reporting:** Decision-makers need a consistent way to compare city performance, passenger categories, revenue, and service ratings.
 
-###  Project Objectives
+### Project Objectives
 
 - Build a structured data pipeline using Databricks.
-- Ingest source data stored in Amazon S3.
-- Clean, standardize, and validate data across Bronze, Silver, and Gold layers.
-- Prepare city-specific datasets for regional analysis.
-- Develop SQL queries for KPIs, business trends, and data quality.
-- Build an executive dashboard to visualize key business metrics.
+- Ingest city and trip data stored in Amazon S3.
+- Clean, standardize, and validate data across multiple processing layers.
+- Prepare fact and dimension datasets for analytics.
+- Create city-specific datasets for regional reporting.
+- Develop SQL queries for business KPIs, trends, and data quality analysis.
+- Build an executive dashboard to visualize important business metrics.
+- 
 
-##  3. Project Architecture
+## 3. Project Architecture
 
-The architecture follows a layered data processing workflow, from source data ingestion to business intelligence.
+The project follows the **Medallion Architecture**, transforming raw source data into clean, structured, and analytics-ready datasets.
 
 ```mermaid
 flowchart TD
-    A[" City CSV and Trips CSV"] --> B[" Amazon S3"]
-    B --> C[" Databricks Lakeflow Spark Declarative Pipelines"]
-    C --> D[" Bronze Layer<br/>Raw Data Ingestion"]
-    D --> E[" Silver Layer<br/>Cleaning and Validation"]
-    E --> F[" Gold Layer<br/>Analytics-Ready Datasets"]
-    F --> G[" SQL Analytics and KPI Queries"]
-    G --> H[" GoodCabs Executive Analytics Dashboard"]
-    I[" Unity Catalog"] -.-> D
+    A["City CSV and Trips CSV"] --> B["Amazon S3"]
+    B --> C["Databricks Lakeflow Spark Declarative Pipelines"]
+    C --> D["Bronze Layer - Raw Ingestion"]
+    D --> E["Silver Layer - Cleaning and Validation"]
+    E --> F["Gold Layer - Analytics-Ready Data"]
+    F --> G["Databricks SQL - KPIs and Analysis"]
+    G --> H["GoodCabs Executive Analytics Dashboard"]
+
+    I["Unity Catalog - Governance and Organization"] -.-> D
     I -.-> E
     I -.-> F
 ```
 
-###  Pipeline Flow
+### Pipeline Flow
 
 1. **Source:** City and trip CSV files are stored in Amazon S3.
-2. **Bronze:** Raw source data is ingested.
+2. **Bronze:** Source data is ingested into the initial processing layer.
 3. **Silver:** Data is cleaned, standardized, and validated.
-4. **Gold:** Data is prepared for analytical queries and reporting.
-5. **SQL Analytics:** Business KPIs and data quality checks are performed.
-6. **Dashboard:** Results are presented through interactive visualizations.
+4. **Gold:** Processed data is organized for business analysis.
+5. **SQL Analytics:** Queries calculate KPIs and investigate business trends and data quality.
+6. **Dashboard:** Visualizations present business performance across cities and categories.
 
-###  <img width="14204" height="4628" alt="architecture" src="https://github.com/user-attachments/assets/27a54e86-34ce-47d0-919f-69c9b099ce71" />
+### Architecture Screenshot
 
-<!-- Upload your image to screenshots/goodcabs-architecture.png and uncomment the next line. -->
+\<!-- Replace the placeholder below with your actual architecture screenshot. -->
 
-<!-- ![GoodCabs Architecture](screenshots/goodcabs-architecture.png) -->
+\<!-- ![GoodCabs Project Architecture]\(screenshots/goodcabs-architecture.png) -->
 
-##  4. Data Pipeline Implementation
+## 4. Data Pipeline Implementation
 
-###  Bronze Layer — Raw Data Ingestion
+### 4.1 Bronze Layer — Raw Data Ingestion
 
-- Ingests city and trip source data from Amazon S3.
-- Uses Databricks pipeline transformations to process source files.
+**Purpose:** Ingest source data and make it available for downstream transformations.
+
+- Ingests city and trip data from Amazon S3.
+- Uses Databricks pipeline definitions to process source files.
 - Captures ingestion metadata where configured.
-- Prepares raw data for downstream processing.
-- Uses Auto Loader for file-based incremental ingestion where configured.
+- Supports incremental file ingestion through Auto Loader where implemented.
+- Provides the source layer for Silver transformations.
 
-**Pipeline files:**
+**Pipeline files**
+
 - `transformations/bronze/city.py`
 - `transformations/bronze/trip.py`
 
- **Bronze Layer Screenshot**
+**Bronze Layer Screenshot**
 
-<!-- ![Bronze Layer](screenshots/bronze-layer.png) -->
+\<!-- ![Bronze Layer]\(screenshots/bronze-layer.png) -->
 
-###  Silver Layer — Data Cleaning and Transformation
+### 4.2 Silver Layer — Data Cleaning and Transformation
+
+**Purpose:** Prepare consistent and validated datasets for analytical processing.
 
 - Cleans and standardizes source data.
 - Renames selected columns into consistent formats.
-- Creates City and Calendar dimension datasets.
+- Creates the City and Calendar dimension datasets.
 - Applies configured data quality expectations.
 - Validates business dates and rating values where defined.
-- Prepares transformed trip data for analytical processing.
+- Prepares trip data for downstream analytical use.
 
-**Data quality rules include:**
+**Data quality rules include**
+
 - Business-date validation.
 - Passenger ratings between 1 and 10.
 - Driver ratings between 1 and 10.
 
-**Pipeline files:**
+**Pipeline files**
+
 - `transformations/silver/city.py`
 - `transformations/silver/calendar.py`
 - `transformations/silver/trip.py`
 
- **Silver Layer Screenshot**
+**Silver Layer Screenshot**
 
-<!-- ![Silver Layer](screenshots/silver-layer.png) -->
+\<!-- ![Silver Layer]\(screenshots/silver-layer.png) -->
 
-###  Gold Layer — Business-Ready Data
+### 4.3 Gold Layer — Business-Ready Data
 
-- Prepares datasets for business analysis.
+**Purpose:** Provide structured datasets for business intelligence and regional analysis.
+
 - Maintains the `fact_trips` dataset for trip-level analysis.
-- Creates city-specific Gold datasets for regional reporting.
-- Supports analysis of revenue, trip volume, distance, and ratings.
-- Supplies processed data for SQL queries and dashboard visualizations.
+- Uses processed trip data with relevant city and calendar information for reporting.
+- Creates city-specific Gold datasets for regional analysis.
+- Supports analysis of trip volume, revenue, distance, and ratings.
+- Provides datasets for SQL queries and dashboard visualizations.
 
-**Key datasets:**
+**Key datasets**
+
 - `transportation.gold.fact_trips`
 - City-specific Gold datasets for Chandigarh, Coimbatore, Indore, Jaipur, Kochi, Lucknow, Mysore, Surat, Vadodara, and Visakhapatnam.
 
- **Gold Layer Screenshot**
+**Gold Layer Screenshot**
 
-<!-- ![Gold Layer](screenshots/gold-layer.png) -->
+\<!-- ![Gold Layer]\(screenshots/gold-layer.png) -->
 
-###  Lakeflow Spark Declarative Pipelines
+### 4.4 Lakeflow Spark Declarative Pipelines
 
-The project uses a declarative approach to define data transformations and their dependencies.
+The project uses Lakeflow Spark Declarative Pipelines to define data transformations and their dependencies declaratively.
 
-**Key concepts explored:**
+**Key concepts explored**
 
 - Declarative pipeline development.
-- Pipeline dependency management and orchestration.
-- Incremental ingestion using Auto Loader where configured.
+- Pipeline dependency management.
+- Incremental ingestion with Auto Loader where configured.
 - Data quality expectations.
-- Change data capture concepts and CDC flows where implemented.
+- Change data capture (CDC) concepts and flows where implemented.
+- Structured processing through Bronze, Silver, and Gold layers.
 
- **Pipeline Execution Graph**
+**Pipeline Execution Graph**
 
-<!-- ![Pipeline Graph](screenshots/pipeline-graph.png) -->
+\<!-- ![GoodCabs Pipeline Execution Graph]\(screenshots/pipeline-graph.png) -->
 
-##  5. Data Modeling
+## 5. Medallion Data Modeling
 
-| Dataset | Layer | Purpose |
-|---|---|---|
-| City | Silver | City identifiers and descriptive attributes |
-| Calendar | Silver | Date-related attributes and configured holiday information |
-| Trips Fact | Gold | Trip-level measures for analysis |
-| City-Specific Datasets | Gold | City-level and regional reporting |
+| Dataset                | Layer  | Purpose                                                              |
+| ---------------------- | ------ | -------------------------------------------------------------------- |
+| City                   | Silver | Stores city identifiers and descriptive attributes                   |
+| Calendar               | Silver | Provides date-related attributes and configured calendar information |
+| Trips Fact             | Gold   | Supports trip-level business analysis                                |
+| City-Specific Datasets | Gold   | Supports regional reporting and city-level comparisons               |
 
-This structure supports analysis of trips by city, date, passenger category, revenue, and service ratings.
+This structure supports analysis across cities, dates, passenger categories, revenue, trip distance, and service ratings.
 
-##  6. SQL Analytics and KPI Development
+## 6. SQL Analysis and Business KPIs
 
-I extended the project with additional SQL queries in Databricks to analyze business performance and investigate data quality.
+I extended the project with additional SQL queries in Databricks to investigate business performance and data quality.
 
-| Analysis | Purpose |
-|---|---|
-|  Executive KPIs | Total trips, total revenue, average distance, and ratings |
-|  Overall Performance | High-level transportation metrics |
-|  City Performance | Comparison of trips and revenue across cities |
-|  Passenger Category Analysis | Trip distribution and revenue by passenger category |
-|  Monthly Trends | Changes in trip volume and revenue over time |
-|  Weekday vs. Weekend | Comparison of revenue by day type |
-|  Service Quality | Passenger and driver rating analysis |
-|  City Rating Comparison | Comparison of ratings across cities |
-|  Revenue and Distance Validation | Checks for invalid or unexpected values |
-|  Data Freshness | Latest available business date and freshness checks |
-|  Duplicate Checks | Investigation of duplicate records |
-|  Data Completeness | Checks for missing or incomplete data |
+| Analysis Area                   | Purpose                                                        |
+| ------------------------------- | -------------------------------------------------------------- |
+| Executive KPIs                  | Summarizes total trips, revenue, average distance, and ratings |
+| Overall Performance             | Evaluates overall transportation metrics                       |
+| City Performance                | Compares trip volume and revenue across cities                 |
+| Passenger Category Analysis     | Examines trips and revenue by passenger category               |
+| Monthly Trends                  | Analyzes changes in trip volume and revenue over time          |
+| Weekday vs. Weekend             | Compares revenue by day type                                   |
+| Service Quality                 | Evaluates passenger and driver ratings                         |
+| City Rating Comparison          | Compares ratings across cities                                 |
+| Revenue and Distance Validation | Investigates invalid or unexpected values                      |
+| Data Freshness                  | Checks the latest available business date and data freshness   |
+| Duplicate Checks                | Investigates duplicate records                                 |
+| Data Completeness               | Checks for missing or incomplete data                          |
 
-These queries connect the processed datasets to practical business questions and help evaluate analytical reliability.
+These queries connect the data pipeline to practical business questions and help evaluate the reliability of analytical results.
 
- **SQL Analytics Screenshot**
+### SQL Analytics Screenshot
 
-<!-- ![GoodCabs SQL Analytics](screenshots/sql-analytics.png) -->
+\<!-- ![GoodCabs SQL Analytics]\(screenshots/sql-analytics.png) -->
 
-##  7. GoodCabs Executive Analytics Dashboard
+## 7. GoodCabs Executive Analytics Dashboard
 
 I created the **GoodCabs Executive Analytics** dashboard in Databricks to present key performance indicators and business trends.
 
-###  KPI Cards
+### KPI Cards
 
--  Total Trips
--  Average Trip Distance
--  Average Passenger Rating
--  Total Revenue
--  Average Driver Rating
+- Total Trips
+- Average Trip Distance
+- Average Passenger Rating
+- Total Revenue
+- Average Driver Rating
 
-###  Dashboard Visualizations
+### Dashboard Visualizations
 
 - Revenue by City
 - Trips by City
@@ -206,47 +220,62 @@ I created the **GoodCabs Executive Analytics** dashboard in Databricks to presen
 - Monthly Revenue Trend
 - City Rating Comparison
 
-The dashboard brings together key metrics and supporting visualizations to help explore performance across cities, passenger categories, and time periods.
+The dashboard combines summary metrics with detailed visualizations to help explore business performance across cities, passenger categories, and time periods.
 
-###  Executive Dashboard Screenshot
+### Executive Dashboard Screenshot
 
-<!-- ![GoodCabs Executive Analytics Dashboard](screenshots/goodcabs-executive-dashboard.png) -->
+\<!-- ![GoodCabs Executive Analytics Dashboard]\(screenshots/goodcabs-executive-dashboard.png) -->
 
-###  Additional Dashboard Views
+### Additional Dashboard Views
 
-<!-- ![City Performance](screenshots/dashboard-city-performance.png) -->
+\<!-- ![City Performance Analysis]\(screenshots/dashboard-city-performance.png) -->
 
-<!-- ![Monthly Revenue Trends](screenshots/dashboard-monthly-trends.png) -->
+\<!-- ![Monthly Revenue Trends]\(screenshots/dashboard-monthly-trends.png) -->
 
-##  8. Data Governance and Access Management
+## 8. Data Quality and Reliability
 
-The project uses **Unity Catalog** to organize datasets within the `transportation` catalog.
+Data quality checks help identify issues that could affect business reporting.
+
+The project includes or explores the following validation areas:
+
+- Business-date validation.
+- Passenger and driver rating validation.
+- Revenue and distance validity checks.
+- Duplicate-record checks.
+- Data completeness checks.
+- Data freshness monitoring.
+
+Pipeline-level expectations validate records during processing, while SQL-based checks support further investigation of processed data.
+
+## 9. Data Governance and Access Management
+
+The project uses **Unity Catalog** to organize data within the `transportation` catalog.
 
 - **Bronze schema:** Ingested source data.
 - **Silver schema:** Cleaned and transformed data.
 - **Gold schema:** Analytics-ready datasets.
-- **Access management:** Unity Catalog supports permissions on data assets.
+- **Data permissions:** Unity Catalog supports permissions on data assets.
 - **Regional reporting:** City-specific datasets can support appropriately scoped access when permissions are configured.
 
-##  9. Technology Stack
+## 10. Technology Stack
 
-| Technology | Purpose |
-|---|---|
-| Databricks Free Edition | Data engineering and analytics environment |
-| Lakeflow Spark Declarative Pipelines | Declarative pipeline development |
-| Apache Spark / PySpark | Data processing and transformation |
-| Python | Pipeline implementation |
-| SQL | KPI calculations, business analysis, and validation |
-| Amazon S3 | Cloud storage for source files |
-| Delta Lake | Reliable table storage and data operations |
-| Unity Catalog | Data organization and access management |
-| Medallion Architecture | Layered data processing |
-| Git and GitHub | Version control and project documentation |
-| Databricks Dashboards | Business performance visualization |
+| Technology                           | Purpose                                             |
+| ------------------------------------ | --------------------------------------------------- |
+| Databricks Free Edition              | Data engineering and analytics environment          |
+| Lakeflow Spark Declarative Pipelines | Declarative pipeline development and execution      |
+| Apache Spark / PySpark               | Data processing and transformation                  |
+| Python                               | Pipeline implementation                             |
+| SQL                                  | Business analysis, KPI calculations, and validation |
+| Amazon S3                            | Cloud storage for source data                       |
+| Delta Lake                           | Reliable table storage and data operations          |
+| Unity Catalog                        | Data organization and access management             |
+| Medallion Architecture               | Layered data processing                             |
+| Git and GitHub                       | Version control and project documentation           |
+| Databricks Dashboards                | Business performance visualization                  |
 
-##  10. Repository Structure
+## 11. Repository Structure
 
-```text
+```
 goodcabs-data-engineering/
 │
 ├── README.md
@@ -266,38 +295,51 @@ goodcabs-data-engineering/
         └── City-specific transformation files
 ```
 
-*The structure summarizes the principal project files. Ensure the names match your actual GitHub repository.*
+*This shows the main project structure. The Gold folder contains the actual city-specific transformation files in the repository.*
 
-##  11. Key Learnings
+## 12. How to Explore the Project
 
-- Building a multi-layer data engineering workflow.
-- Working with Databricks and cloud-based source data.
-- Applying Medallion Architecture principles.
+To explore the existing project:
+
+1. Review the README and project setup notebook.
+2. Explore the Bronze, Silver, and Gold transformation files.
+3. Review the corresponding pipeline in Databricks.
+4. Inspect the tables in the `transportation` catalog.
+5. Review the SQL queries used for KPIs, trends, and data quality.
+6. Open the GoodCabs Executive Analytics dashboard.
+
+To reproduce the project in another environment, you will need a compatible Databricks workspace, access to an Amazon S3 bucket containing the source files, appropriate catalog and storage configuration, and the required pipeline setup. Workspace-specific paths, connections, and permissions must be configured for that environment.
+
+## 13. Key Learnings
+
+- Designing a multi-layer data pipeline using the Medallion Architecture.
+- Working with Databricks and Amazon S3.
 - Using PySpark for data transformations.
-- Understanding declarative pipelines and incremental ingestion.
+- Understanding Lakeflow Spark Declarative Pipelines.
+- Exploring incremental ingestion with Auto Loader.
 - Applying data quality expectations and validation checks.
-- Preparing fact and dimension datasets for analysis.
-- Writing SQL queries for business KPIs and trends.
+- Preparing fact and dimension datasets for analytics.
+- Writing SQL queries for KPIs, trends, and comparisons.
 - Building a dashboard to communicate business insights.
 - Exploring data governance and access management.
 
-##  12. Project Summary
+## 14. Project Summary
 
-GoodCabs demonstrates how raw transportation data can be ingested, transformed, validated, and prepared for business analysis using Databricks.
+GoodCabs demonstrates how raw transportation data can be transformed into structured datasets for regional reporting and business analysis.
 
-The additional SQL queries, KPI analysis, data quality investigations, and Executive Analytics dashboard extend the project by connecting the data engineering workflow to practical business questions.
+The additional SQL queries, KPI calculations, data quality investigations, and Executive Analytics dashboard extend the project beyond pipeline processing by connecting the data to practical business questions.
 
-**Project Domain:** Transportation Analytics
-**Project Type:** Data Engineering and Business Intelligence
-**Primary Skills:** Databricks, PySpark, SQL, AWS S3, Data Quality, KPI Analysis, and Dashboard Development
+**Project Domain:** Transportation Analytics\
+**Project Type:** Data Engineering and Business Intelligence\
+**Core Skills:** Databricks, PySpark, SQL, AWS S3, Data Quality, KPI Analysis, and Dashboard Development
 
-##  13. About Me
+## 15. About Me
 
-Hi, I'm **Sejal Jha**, an aspiring Data Engineer interested in building data pipelines and transforming raw data into reliable, analytics-ready datasets.
+Hi, I'm **Sejal Jha**, a Master of Data Science and Analytics student passionate about data engineering, cloud data platforms, SQL analytics, and building reliable data pipelines that transform raw data into meaningful business insights.
 
-- **LinkedIn:** [Add your LinkedIn URL]
-- **GitHub:** [Add your GitHub URL]
-- **Email:** [Add your professional email]
+- **LinkedIn:** [Add your LinkedIn profile URL]
+- **GitHub:** [Add your GitHub profile URL]
+- **Email:** [Add your professional email address]
 
 ---
 
