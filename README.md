@@ -63,20 +63,22 @@ flowchart TD
     I -.-> F
 ```
 
-### Pipeline Flow
+![GoodCabs Project Architecture](architecture.png)
 
-1. **Source:** City and trip CSV files are stored in Amazon S3.
-2. **Bronze:** Source data is ingested into the initial processing layer.
-3. **Silver:** Data is cleaned, standardized, and validated.
-4. **Gold:** Processed data is organized for business analysis.
-5. **SQL Analytics:** Queries calculate KPIs and investigate business trends and data quality.
-6. **Dashboard:** Visualizations present business performance across cities and categories.
+## 4. Pipeline Flow
 
-### Architecture Screenshot
+The data pipeline processes raw city and trip data through three layers of the Medallion Architecture.
 
-\<!-- Replace the placeholder below with your actual architecture screenshot. -->
+1. **Data Ingestion:** City and trip CSV files are stored in Amazon S3.
+2. **Bronze Layer:** Raw data is ingested into Databricks for further processing.
+3. **Silver Layer:** Data is cleaned, standardized, and validated for quality.
+4. **Gold Layer:** Processed data is organized into analytics-ready fact and city-specific datasets.
+5. **SQL Analytics:** SQL queries are used to calculate business KPIs and analyze trip performance, revenue, passenger categories, and city-level trends.
+6. **Dashboard:** The GoodCabs Executive Analytics dashboard presents key metrics and business insights.
 
-\<!-- ![GoodCabs Project Architecture]\(screenshots/goodcabs-architecture.png) -->
+**Pipeline Flow:**
+
+`Amazon S3 → Bronze → Silver → Gold → SQL Analytics → Executive Dashboard`
 
 ## 4. Data Pipeline Implementation
 
