@@ -127,7 +127,8 @@ The data pipeline processes raw city and trip data through three layers of the M
 
 **Silver Layer Screenshot**
 
-\<!-- ![Silver Layer]\(screenshots/silver-layer.png) -->
+<img width="1864" height="905" alt="Silver Layer Screenshot" src="https://github.com/user-attachments/assets/95777335-839f-45c7-a547-e502ce111941" />
+
 
 ### 4.3 Gold Layer — Business-Ready Data
 
@@ -146,7 +147,7 @@ The data pipeline processes raw city and trip data through three layers of the M
 
 **Gold Layer Screenshot**
 
-\<!-- ![Gold Layer]\(screenshots/gold-layer.png) -->
+<img width="1896" height="913" alt="Gold Layer Screenshot" src="https://github.com/user-attachments/assets/b61fc8d7-f9a6-49c6-8afe-362ba27e67e3" />
 
 ### 4.4 Lakeflow Spark Declarative Pipelines
 
@@ -163,7 +164,9 @@ The project uses Lakeflow Spark Declarative Pipelines to define data transformat
 
 **Pipeline Execution Graph**
 
-\<!-- ![GoodCabs Pipeline Execution Graph]\(screenshots/pipeline-graph.png) -->
+<img width="1902" height="907" alt="transportation_pipeline screenshot 2" src="https://github.com/user-attachments/assets/777ddf6f-b27b-40b1-93a2-5dba76102ccd" />
+<img width="1497" height="636" alt="pipeline-graph screenshot 0" src="https://github.com/user-attachments/assets/62abea01-f49b-42d3-8a33-7191061d2da6" />
+<img width="1910" height="907" alt="pipeline-graph screenshot 2" src="https://github.com/user-attachments/assets/ef29ea6d-75a8-45de-a20f-d7e16c60ed88" />
 
 ## 5. Medallion Data Modeling
 
@@ -199,7 +202,10 @@ These queries connect the data pipeline to practical business questions and help
 
 ### SQL Analytics Screenshot
 
-\<!-- ![GoodCabs SQL Analytics]\(screenshots/sql-analytics.png) -->
+<img width="1907" height="906" alt="SQL Analysis and Business KPIs" src="https://github.com/user-attachments/assets/05fdc9e2-7daf-41fe-bf1d-ed7d027c5aa8" />
+<img width="1902" height="907" alt="sql-analytics screenshot 1" src="https://github.com/user-attachments/assets/c6c50f27-ddd4-4d7f-8fc2-d7f1f25393a0" />
+<img width="1907" height="906" alt="goodcabs-sql-analysis  screeenshot" src="https://github.com/user-attachments/assets/e081e91c-f552-4d39-8a04-50a4c3be5540" />
+
 
 ## 7. GoodCabs Executive Analytics Dashboard
 
@@ -226,14 +232,10 @@ I created the **GoodCabs Executive Analytics** dashboard in Databricks to presen
 The dashboard combines summary metrics with detailed visualizations to help explore business performance across cities, passenger categories, and time periods.
 
 ### Executive Dashboard Screenshot
-
-Executive-Dashboard Screenshot 4.png
-
-### Additional Dashboard Views
-
-\<!-- ![City Performance Analysis]\(screenshots/dashboard-city-performance.png) -->
-
-\<!-- ![Monthly Revenue Trends]\(screenshots/dashboard-monthly-trends.png) -->
+<img width="1854" height="906" alt="Dashboard Screenshot 1" src="https://github.com/user-attachments/assets/50690a8d-59f7-4705-8efd-41e8ec7f918c" />
+<img width="1913" height="907" alt="Dashboard Screenshot 2" src="https://github.com/user-attachments/assets/d47384bb-081b-4491-9035-2e775e8dce13" />
+<img width="1865" height="794" alt="Dashboards Screenshot 3" src="https://github.com/user-attachments/assets/655e5b2d-835b-4521-a7c0-869f45e099cf" />
+<img width="1876" height="770" alt="Executive-Dashboard Screenshot 4" src="https://github.com/user-attachments/assets/8485f544-3eed-4045-9bdb-9d8b29337030" />
 
 ## 8. Data Quality and Reliability
 
