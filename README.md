@@ -1,4 +1,4 @@
-#  GoodCabs — End-to-End Data Engineering & Analytics — LakeFlow Spark Declarative Pipeline
+<img width="1876" height="770" alt="Executive-Dashboard Screenshot 4" src="https://github.com/user-attachments/assets/096d7290-b673-4dda-acdb-277ca91cefbe" />#  GoodCabs — End-to-End Data Engineering & Analytics — LakeFlow Spark Declarative Pipeline
 
 The project transforms raw cab-trip data into structured, city-specific datasets and business insights, supported by SQL analysis and an executive analytics dashboard.
 
@@ -227,7 +227,7 @@ The dashboard combines summary metrics with detailed visualizations to help expl
 
 ### Executive Dashboard Screenshot
 
-\<!-- ![GoodCabs Executive Analytics Dashboard]\(screenshots/goodcabs-executive-dashboard.png) -->
+Executive-Dashboard Screenshot 4.png
 
 ### Additional Dashboard Views
 
@@ -280,25 +280,15 @@ The project uses **Unity Catalog** to organize data within the `transportation` 
 
 ```
 goodcabs-data-engineering/
-│
 ├── README.md
-├── Project Setup.ipynb
-│
-└── transformations/
-    ├── bronze/
-    │   ├── city.py
-    │   └── trip.py
-    │
-    ├── silver/
-    │   ├── calendar.py
-    │   ├── city.py
-    │   └── trip.py
-    │
-    └── gold/
-        └── City-specific transformation files
+├── project_setup.ipynb
+├── architecture.png
+├── transformations/
+│   ├── bronze/
+│   ├── silver/
+│   └── gold/
+└── screenshots/
 ```
-
-*This shows the main project structure. The Gold folder contains the actual city-specific transformation files in the repository.*
 
 ## 12. How to Explore the Project
 
@@ -340,9 +330,9 @@ The additional SQL queries, KPI calculations, data quality investigations, and E
 
 Hi, I'm **Sejal Jha**, a Master of Data Science and Analytics student passionate about data engineering, cloud data platforms, SQL analytics, and building reliable data pipelines that transform raw data into meaningful business insights.
 
-- **LinkedIn:** [Add your LinkedIn profile URL]
+- **LinkedIn:** [www.linkedin.com/in/sejal-jha-b46b06379]
 - **GitHub:** [Add your GitHub profile URL]
-- **Email:** [Add your professional email address]
+- **Email:** [sejaljha0120@gmail.com]
 
 ---
 
