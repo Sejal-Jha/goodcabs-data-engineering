@@ -202,7 +202,6 @@ These queries connect the data pipeline to practical business questions and help
 
 ### SQL Analytics Screenshot
 
-<img width="1907" height="906" alt="SQL Analysis and Business KPIs" src="https://github.com/user-attachments/assets/05fdc9e2-7daf-41fe-bf1d-ed7d027c5aa8" />
 <img width="1902" height="907" alt="sql-analytics screenshot 1" src="https://github.com/user-attachments/assets/c6c50f27-ddd4-4d7f-8fc2-d7f1f25393a0" />
 <img width="1907" height="906" alt="goodcabs-sql-analysis  screeenshot" src="https://github.com/user-attachments/assets/e081e91c-f552-4d39-8a04-50a4c3be5540" />
 
