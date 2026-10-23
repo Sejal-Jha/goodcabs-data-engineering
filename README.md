@@ -1,4 +1,4 @@
-<img width="1876" height="770" alt="Executive-Dashboard Screenshot 4" src="https://github.com/user-attachments/assets/096d7290-b673-4dda-acdb-277ca91cefbe" />#  GoodCabs — End-to-End Data Engineering & Analytics — LakeFlow Spark Declarative Pipeline
+#  GoodCabs — End-to-End Data Engineering & Analytics — LakeFlow Spark Declarative Pipeline
 
 The project transforms raw cab-trip data into structured, city-specific datasets and business insights, supported by SQL analysis and an executive analytics dashboard.
 
