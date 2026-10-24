@@ -1,4 +1,4 @@
-#  GoodCabs — End-to-End Data Engineering & Analytics — LakeFlow Spark Declarative Pipeline
+# GoodCabs — End-to-End Data Engineering & Analytics with Lakeflow Spark Declarative Pipelines
 
 The project transforms raw cab-trip data into structured, city-specific datasets and business insights, supported by SQL analysis and an executive analytics dashboard.
 
@@ -42,7 +42,6 @@ The project addresses the following business challenges:
 - Create city-specific datasets for regional reporting.
 - Develop SQL queries for business KPIs, trends, and data quality analysis.
 - Build an executive dashboard to visualize important business metrics.
-- 
 
 ## 3. Project Architecture
 
@@ -332,7 +331,7 @@ The additional SQL queries, KPI calculations, data quality investigations, and E
 Hi, I'm **Sejal Jha**, a Master of Data Science and Analytics student passionate about data engineering, cloud data platforms, SQL analytics, and building reliable data pipelines that transform raw data into meaningful business insights.
 
 - **LinkedIn:** [www.linkedin.com/in/sejal-jha-b46b06379]
-- **GitHub:** [Add your GitHub profile URL]
+- **GitHub:** [https://share.google/rE3qxY1L3Mqz7dw44]
 - **Email:** [sejaljha0120@gmail.com]
 
 ---
